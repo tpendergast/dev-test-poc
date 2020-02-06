@@ -19,8 +19,8 @@
     - debug:
         msg: "Test JSON boolean val 'myboolean' has value {{ lookup('cypher','secret=secret/myjsonobject:myboolean') }}"
 
-    - debug:
-        msg: "Test JSON array val 'mylist[0]' has value {{ lookup('cypher','secret=secret/myjsonobject:mylist[0]') }}"
+#    - debug:
+#        msg: "Test JSON array val 'mylist[0]' has value {{ lookup('cypher','secret=secret/myjsonobject:mylist[0]') }}"
 
     - debug:
         msg: "Test JSON object val 'myobject.mypropertykey' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject.mypropertykey') }}"
