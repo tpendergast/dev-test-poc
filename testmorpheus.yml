@@ -8,11 +8,18 @@
         msg: "Home environment variable is {{ lookup('env','HOME') }}"
 
     - debug:
-        msg: "CLI extra var myclikey is {{ myclikey }}"
+        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
+
+#    - debug:
+#        msg: "CLI extra var myclikey is {{ myclikey }}"
+
+#    - debug:
+#        msg: "CLI extra var myclikey2 is {{ myclikey2 }}"
+
+
+#    - name: ping all hosts
+#      ping:
 
     - debug:
-        msg: "CLI extra var myclikey2 is {{ myclikey2 }}"
+        msg: Ending test playbook
 
-
-    - name: ping all hosts
-      ping:
