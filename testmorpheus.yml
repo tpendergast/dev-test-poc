@@ -5,10 +5,13 @@
         msg: Starting test playbook
 
     - debug:
-        msg: "Home environment variable is {{ lookup('env','HOME') }}"
+        msg: "HOME environment variable is {{ lookup('env','HOME') }}"
 
     - debug:
         msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
+
+    - debug:
+        msg: "Test JSON string val 'mystring' has value {{ lookup('cypher','secret=secret/myjsonobject:mystring') }}"
 
 #    - debug:
 #        msg: "CLI extra var myclikey is {{ myclikey }}"
