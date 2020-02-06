@@ -13,6 +13,9 @@
     - debug:
         msg: "Test JSON string val 'mystring' has value {{ lookup('cypher','secret=secret/myjsonobject:mystring') }}"
 
+    - debug:
+        msg: "Test JSON integer val 'myinteger' has value {{ lookup('cypher','secret=secret/myjsonobject:myinteger') }}"
+
 #    - debug:
 #        msg: "CLI extra var myclikey is {{ myclikey }}"
 
