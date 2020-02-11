@@ -8,6 +8,9 @@
         msg: "HOME environment variable is {{ lookup('env','HOME') }}"
 
     - debug:
+        msg: "Morpheus instance hostname is {{ morpheus['instance']['hostname'] }}"
+
+    - debug:
         msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
 
     - debug:
