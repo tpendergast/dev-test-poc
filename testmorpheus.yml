@@ -12,7 +12,7 @@
     # Get Morpheus cypher
     - name: get Morpheus secret/provisioning cypher
       set_fact:
-        secret: "{{ loookup('cypher','secret=secret/provisioning') }}"
+        secret: "{{ lookup('cypher','secret=secret/provisioning') }}"
         no_log: true
 
     # Set variables from Morpheus cypher content
