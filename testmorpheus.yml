@@ -1,5 +1,4 @@
 - hosts: all
-  gather_facts: false
   tasks: 
     - debug:
         msg: Starting test playbook
@@ -10,17 +9,30 @@
     - debug:
         msg: "Morpheus instance hostname is {{ morpheus['instance']['hostname'] }}"
 
-    - debug:
-        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
+    # Get Morpheus cypher
+    - name: get Morpheus secret/provisioning cypher
+      set_fact:
+        secret: "{{ loookup('cypher','secret=secret/provisioning') }}"
+        no_log: true
 
-    - debug:
-        msg: "Test JSON string val 'mystring' has value {{ lookup('cypher','secret=secret/myjsonobject:mystring') }}"
+    # Set variables from Morpheus cypher content
+    - name: set values from Morpheus cypher
+      set_fact:
+        snmpd_username: "{{ secret.linux.snmp.username }}"
+        snmpd_password: "{{ secret.linux.snmp.password }}"
+      no_log: true
 
-    - debug:
-        msg: "Test JSON integer val 'myinteger' has value {{ lookup('cypher','secret=secret/myjsonobject:myinteger') }}"
+#    - debug:
+#        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
 
-    - debug:
-        msg: "Test JSON boolean val 'myboolean' has value {{ lookup('cypher','secret=secret/myjsonobject:myboolean') }}"
+#    - debug:
+#        msg: "Test JSON string val 'mystring' has value {{ lookup('cypher','secret=secret/myjsonobject:mystring') }}"
+
+#    - debug:
+#        msg: "Test JSON integer val 'myinteger' has value {{ lookup('cypher','secret=secret/myjsonobject:myinteger') }}"
+
+#    - debug:
+#        msg: "Test JSON boolean val 'myboolean' has value {{ lookup('cypher','secret=secret/myjsonobject:myboolean') }}"
 
 #    - debug:
 #        msg: "Test JSON array val 'mylist[0]' has value {{ lookup('cypher','secret=secret/myjsonobject:mylist[0]') }}"
@@ -28,8 +40,8 @@
 #    - debug:
 #        msg: "Test JSON object val 'myobject.mypropertykey' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject.mypropertykey') }}"
 
-    - debug:
-        msg: "Test JSON object 'myobject' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject') }}"
+#    - debug:
+#        msg: "Test JSON object 'myobject' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject') }}"
 
 #    - debug:
 #        msg: "CLI extra var myclikey is {{ myclikey }}"
