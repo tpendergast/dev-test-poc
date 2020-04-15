@@ -13,7 +13,7 @@
     - name: get Morpheus secret/provisioning cypher
       set_fact:
         secret: "{{ lookup('cypher','secret=secret/provisioning') }}"
-        no_log: true
+      no_log: true
 
     # Set variables from Morpheus cypher content
     - name: set values from Morpheus cypher
@@ -21,6 +21,18 @@
         snmpd_username: "{{ secret.linux.snmp.username }}"
         snmpd_password: "{{ secret.linux.snmp.password }}"
       no_log: true
+
+    # Get bmn_tun2_ip
+    - name: Get BMN tunnel2 ip from GetTenantDetails task
+      set_fact:
+        bmn_ip: "{{ morpheus.results.GetTenantDetails.bmn_tun2_ip"
+
+    # Get encrypted password
+    - name: Get encrypted local user password
+      set_fact:
+        encrypted_password: "{{ morpheus.results.createlocaladminaccount.encrypted_password }}"
+      no_log: true
+
 
 #    - debug:
 #        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
