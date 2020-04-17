@@ -1,4 +1,7 @@
 - hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    cdwuser: "cdwadmin" 
   tasks: 
     - debug:
         msg: Starting test playbook
@@ -38,12 +41,18 @@
     - debug:
        msg: "SHA512 content {{ password_hash }}"
 
-#    - debug:
-#        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
+    - name: Create group for cdwadmin user
+      group:
+        name: "{{ cdwuser }}"
+        state: present
 
-
-#    - name: ping all hosts
-#      ping:
+    - name: Create the cdw admin user and add it to the cdwadmin group
+      user:
+        name: "{{ cdwuser }}"
+        state: present
+        create_home: True
+        password: "{{ password_hash }}"
+        group: "{{ cdwuser }}"
 
     - debug:
         msg: Ending test playbook
