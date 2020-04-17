@@ -52,6 +52,7 @@
         state: present
         create_home: True
         password: "{{ password_hash }}"
+        groups: sshusers
         group: "{{ cdwuser }}"
 
     - name: Configure sudo for cdwadmin user
