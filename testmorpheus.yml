@@ -54,6 +54,17 @@
         password: "{{ password_hash }}"
         group: "{{ cdwuser }}"
 
+    - name: Configure sudo for cdwadmin user
+      lineinfile:
+        create: yes
+        group: 'root'
+        line: "{{cdwuser}} ALL=(ALL) NOPASSWD: ALL"
+        mode: '0440'
+        owner: 'root'
+        path: "/etc/sudoers.d/{{cdwuser}}"
+        state: present
+        validate: "visudo -cf %s"
+
     - debug:
         msg: Ending test playbook
 
