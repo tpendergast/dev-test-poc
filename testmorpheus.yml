@@ -27,39 +27,19 @@
       set_fact:
         bmn_ip: "{{ morpheus.results.GetTenantDetails.bmn_tun2_ip }}"
 
-    # Get encrypted password
-    - name: Get encrypted local user password
+    - name: Get password hash temp filename
       set_fact:
-        encrypted_password: "{{ morpheus.results.createlocaladminaccount.encrypted_password }}"
-      no_log: true
+         tempfile: "{{ morpheus.results.createlocaladminaccount.temp_hash_file }}"
 
+    - name: Read password hash content
+      set_fact:
+         password_hash:"{{ lookup('file',tempfile) }}" 
+
+    -debug:
+       msg: "SHA512 content {{ password_hash }}"
 
 #    - debug:
 #        msg: "Test simple secret 'mysimplekey' has value {{ lookup('cypher','secret=secret/mysimplekey') }}"
-
-#    - debug:
-#        msg: "Test JSON string val 'mystring' has value {{ lookup('cypher','secret=secret/myjsonobject:mystring') }}"
-
-#    - debug:
-#        msg: "Test JSON integer val 'myinteger' has value {{ lookup('cypher','secret=secret/myjsonobject:myinteger') }}"
-
-#    - debug:
-#        msg: "Test JSON boolean val 'myboolean' has value {{ lookup('cypher','secret=secret/myjsonobject:myboolean') }}"
-
-#    - debug:
-#        msg: "Test JSON array val 'mylist[0]' has value {{ lookup('cypher','secret=secret/myjsonobject:mylist[0]') }}"
-
-#    - debug:
-#        msg: "Test JSON object val 'myobject.mypropertykey' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject.mypropertykey') }}"
-
-#    - debug:
-#        msg: "Test JSON object 'myobject' has value {{ lookup('cypher','secret=secret/myjsonobject:myobject') }}"
-
-#    - debug:
-#        msg: "CLI extra var myclikey is {{ myclikey }}"
-
-#    - debug:
-#        msg: "CLI extra var myclikey2 is {{ myclikey2 }}"
 
 
 #    - name: ping all hosts
