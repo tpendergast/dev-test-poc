@@ -33,7 +33,7 @@
 
     - name: Read password hash content
       set_fact:
-         password_hash:"{{ lookup('file',tempfile) }}" 
+         password_hash: "{{lookup('file',tempfile)}}" 
 
     - debug:
        msg: "SHA512 content {{ password_hash }}"
