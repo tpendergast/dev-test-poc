@@ -35,7 +35,7 @@
       set_fact:
          password_hash:"{{ lookup('file',tempfile) }}" 
 
-    -debug:
+    - debug:
        msg: "SHA512 content {{ password_hash }}"
 
 #    - debug:
