@@ -28,7 +28,7 @@
     # Get bmn_tun2_ip
     - name: Get BMN tunnel2 ip from GetTenantDetails task
       set_fact:
-        bmn_ip: "{{ morpheus.results.GetTenantDetails.bmn_tun2_ip }}"
+        bmn_ip: "{{ morpheus.results.gettenantdetails.bmn_tun2_ip }}"
 
     - name: Get password hash temp filename
       set_fact:
